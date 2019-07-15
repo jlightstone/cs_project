@@ -1,21 +1,18 @@
 ## I. Problem statements
 
-Earthquakes are devastating natural disasters and possess the potential to destroy buildings and cities. In the process they can injure and even kill hundreds and thousands of people. It is necessary to develop solutions to better understand seismic activity to enable accurate and precise prediction of when an earthquake will happen. Tools with this capability provide could equip officials with the necessary information to minimize risks for populations expected to experience seismic activity.  
+Earthquakes are devastating natural disasters and possess the potential to destroy buildings and cities. In the process they can injure and even kill hundreds and thousands of people. It is necessary to develop solutions to better understand seismic activity. Futher more, it is a priority to develop tools capable of the accurate and precise prediction of when an earthquake will happen. Prediction tools of this nature could equip officials with the necessary information to advice about development plans and safty propocals long before these events occur. 
 
 <p align="center">
   <img width="460" height="300" src="https://github.com/jlightstone/cs_project/blob/master/Graphs/earthquake.jpg">
 </p>
 
-
-Scientist have recently discovered that “constant tremors” measured along fault lines provide valuable information about earthquake activity. The goal of this project is to utilize a machine learning (ML) approach to analyze experimental data that simulates the tremors at fault lines. Ultimately, the goal of the project is to develop a generalized ML model capable of correctly model the tremor waves as a function of time till failure.    
+Scientist have recently discovered that “constant tremors” measured along fault lines provide valuable information about earthquake activity. The goal of this project is to utilize a machine learning (ML) approach to analyze experimental data that simulates the tremors at fault lines. Ultimately, the goal of the project is to develop a generalized ML model capable of correctly predicting the time until failure.    
 
 <p align="center">
   <img/ src="https://github.com/hoangtung167/cx4240/blob/master/CSV%20Files/Introduction_data.png">
 </p>
 
-
-
-The data above shows a continuous block of experimental data. This graph shows plotted accoustic viabrations as a function of time. The plot also shows a "time to failure" component (a.k.a. the time of earthquake). In order to predict the time to failure, statistical features must be extracted from the data. The features used to describe the data are discussed in the next section. 
+The data above shows a continuous block of experimental data used for training and test our models. This graph shows plotted accoustic viabrations as a function of time. The plot also shows a "time to failure" component (a.k.a. the time till earthquake). In order to predict the time to failure, statistical features must be extracted from the data. The features used to describe the data are discussed in the next section. 
 
 #### Environment Setup
 
@@ -44,9 +41,9 @@ import statistics
 
 ## II. Feature Extraction
 
-Using resourses from [kaggle](https://www.kaggle.com/c/LANL-Earthquake-Prediction/discussion/94390#latest-554034), we determined 16 statistical features that serve as potential candidates for understanding our the experimental data. The features are broken into four different catagories- basic, fast fourier transformed, rolling window, and mel-frequency features. 
+Using resourses from [kaggle](https://www.kaggle.com/c/LANL-Earthquake-Prediction/discussion/94390#latest-554034), we determined 16 statistical features that serve as potential candidates for understanding the experimental data. The features are broken into four different catagories- basic, fast fourier transformed, rolling window, and mel-frequency features. 
 
-The basic features are calculate using simple statistics and include ‘mean’, ‘std’, and ‘skew’.  The fast fourier transformed features convert the time-domain signal into a frequency-domain signal, which results in real and imaginary numbers. The mean and standard deviation for the real and imaginary numbers were calculated, resulting in 4 more features. The rolling windows method resulted from breaking the larger data set into a rolling window size of 100. From this, the mean, standard deviation, and upper and lower percentiles subsets were used to extract an additional six features. Lastly, the Librosa toolbox was used to calculate the Mel-frequency cepstral coefficients of two features. 
+The 'basic' features are calculate using simple statistics and include ‘mean’, ‘std’, and ‘skew’.  The 'fast fourier transformed' features convert the time-domain signal into a frequency-domain signal, which results in real and imaginary numbers. The mean and standard deviation for the real and imaginary numbers are calculated, resulting in 4 additional features. The 'rolling windows method' resulted from breaking the larger data set into a rolling window size of 100. From this, the mean, standard deviation, and upper and lower percentiles subsets were used to extract an additional six features. Lastly, the Librosa toolbox was used to calculate the Mel-frequency cepstral coefficients of two features. Below four of the calculated features are plotted on the same graph as the time to failure. 
 
 <p align="center">
   <img/ src="https://github.com/jlightstone/cs_project/blob/master/Graphs/Feature_1.png">
@@ -55,7 +52,7 @@ The basic features are calculate using simple statistics and include ‘mean’,
   <img/ src="https://github.com/jlightstone/cs_project/blob/master/Graphs/Feature_2.png">
 </p>
 
-Once enough features from the data are extracted, one can begin train different ML algorithms to determine which is most capable of modeling the given set. In the following section, we test multiple algorithms in order to determine which are best at predicting the time to failure for a slip plane. The feature importance for each ML method is also discussed. 
+Following feature extraction, we train various ML algorithms. Our goal was to identify which algorthim is most capable of predicting time until failure. In the following section, we provide results pertaining to the prediction capabilities of a multitude of algorithms.
 
 #### Feature Extractions Methods
 
