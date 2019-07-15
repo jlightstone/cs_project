@@ -13,6 +13,7 @@ Scientist have recently discovered that “constant tremors” measured along fa
 The data above shows a continuous block of experimental data. This graph shows plotted accoustic viabrations as a function of time. The plot also shows a "time to failure" component (a.k.a. the time of earthquake). In order to predict the time to failure, statistical features must be extracted from the data. The features used to describe the data are discussed in the next section. 
 
 #### Environment Setup
+
 <details><summary>CLICK TO EXPAND</summary>
 <p>
   
@@ -44,6 +45,7 @@ The basic features are calculate using simple statistics and include ‘mean’,
 
 ![Feature Extraction Concept](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Feature_Extraction_Concept.png)
 
+### Feature Extractions Methods
 
 <details><summary>CLICK TO EXPAND</summary>
 <p>
@@ -90,29 +92,6 @@ def generate_feature_Melfrequency(seg_id, seg, X):
     
     X.loc[seg_id, 'MFCC_mean02'] = mfcc_mean[2]
     X.loc[seg_id, 'MFCC_mean16'] = mfcc_mean[16]
-```
-
-</p>
-</details>
-
-**Fast Fourier Transform (4 features)
-‘FFT_mean_imag’, ‘FFT_mean_real’, ‘FFT_std_max’, ‘FFT_std_real’**
-
-
-
-Mel-frequency.... We use the Librosa toolbox to calculate the Mel-frequency cepstral coefficients of the 2nd and 16th components. 
-
-
-
-
-### Feature Extractions for training data
-
-Since the training data is a large csv file (9.5GB), which exceeds the computation capability of our laptop, we use the pandas with `chunksize = 150000` to load one time-series windown at one. At each time window, 150_000 input data is transformed into 16 dimensional vectors (16 features) and append to input dataframe. The target is the `time before failure` is also appended to a separate dataframe.
-
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-  
-```python
 
 chunksize = 150000
 CsvFileReader = pd.read_csv('train.csv', chunksize = chunksize)
@@ -128,7 +107,8 @@ for seg_id, seg in tqdm_notebook(enumerate(CsvFileReader)):
 X.to_csv('extract_train_Jul08.csv')
 y.to_csv('extract_label_Jul08.csv')
 ```
-
+</p>
+</details>
 
 ### Visualization of 16 features
 
