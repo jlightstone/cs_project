@@ -430,6 +430,7 @@ Validation MeanAbsoluteError: Mean = 2.065 Std = 0.038
 ![SVM linear with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/SVM_linear_withIndex.png)
 
 ####Building NN and SVM
+
 <details><summary>CLICK TO EXPAND</summary>
 <p>
   
