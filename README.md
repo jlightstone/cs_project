@@ -37,10 +37,11 @@ import statistics
 </details>
 
 ## II. Feature Extraction
-<details><summary>CLICK TO EXPAND</summary>
-<p>
+
 
 From the 150_000 acoustic data containing “random” number, we transform this entire time-series window (each has 150_000 data) into 16 statistical features. The features is selected based on the following public release:
+
+
 [link1](https://www.kaggle.com/c/LANL-Earthquake-Prediction/discussion/94390#latest-554034)
 [link2](https://www.kaggle.com/gpreda/lanl-earthquake-eda-and-prediction)
 [link3](https://www.kaggle.com/artgor/seismic-data-eda-and-baseline)
@@ -75,7 +76,11 @@ def generate_feature_basic(seg_id, seg, X):
 **Fast Fourier Transform (4 features)
 ‘FFT_mean_imag’, ‘FFT_mean_real’, ‘FFT_std_max’, ‘FFT_std_real’**
 
-Transform the time-domain signal into frequency-domain signal. Since it is complex number in the frequency-domain, I separate them into real and imaginary parts, each is reported with its mean and standard deviation
+Transform the time-domain signal into frequency-domain signal. Since it is complex number in the frequency-domain, I separate them into real and imaginary parts, each is reported with its mean and standard deviation. 
+
+Rolling windows (6 features)  From the 150_000 data, we choose a rolling window size = 100, at each window, we calculate the mean and standard deviation of each window. We use the numpy percentile function to calculate 5%,30%, 60% of the standard deviation (‘Roll_std_p05’,‘Roll_std_p30’,‘Roll_std_p60’), the top 5% of the mean, the mean of the gradient of these vectors (‘Roll_mean_absDiff’, ‘Roll_std_absDiff’).
+
+Mel-frequency.... We use the Librosa toolbox to calculate the Mel-frequency cepstral coefficients of the 2nd and 16th components. 
 
 <details><summary>CLICK TO EXPAND</summary>
 <p>
@@ -90,21 +95,7 @@ def generate_feature_FFT(seg_id, seg, X):
     X.loc[seg_id, 'FFT_mean_imag'] = imagFFT.mean()
     X.loc[seg_id, 'FFT_std_real'] = realFFT.std()
     X.loc[seg_id, 'FFT_std_max'] = realFFT.max()
-```
-
-</p>
-</details>
-
-**Rolling windows (6 features) 
-‘Roll_mean_absDiff’,‘Roll_mean_p05’,‘Roll_std_absDiff’,‘Roll_std_p05’,‘Roll_std_p30’,‘Roll_std_p60’**  
-
-From the 150_000 data, we choose a rolling window size = 100, at each window, we calculate the mean and standard deviation of each window. We use the numpy percentile function to calculate 5%,30%, 60% of the standard deviation (‘Roll_std_p05’,‘Roll_std_p30’,‘Roll_std_p60’), the top 5% of the mean, the mean of the gradient of these vectors (‘Roll_mean_absDiff’, ‘Roll_std_absDiff’).
-
-
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-  
-```python
+    
 def generate_feature_Roll(seg_id, seg, X):
     xc = pd.Series(seg['acoustic_data'].values)
     
@@ -119,19 +110,7 @@ def generate_feature_Roll(seg_id, seg, X):
     
     X.loc[seg_id, 'Roll_mean_p05'] = np.percentile(x_roll_mean, 5)
     X.loc[seg_id, 'Roll_mean_absDiff'] = np.mean(np.diff(x_roll_mean))
-```
 
-</p>
-</details>
-
-**Mel-frequency cepstral coefficients (2 features)
-‘MFCC_mean02’ ‘MFCC_mean16’)**
-We use the Librosa toolbox to calculate the Mel-frequency cepstral coefficients of the 2nd and 16th components. 
-
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-  
-```python
 def generate_feature_Melfrequency(seg_id, seg, X):
     xc = seg['acoustic_data'].values
     mfcc = librosa.feature.mfcc(xc.astype(np.float64))
@@ -143,6 +122,7 @@ def generate_feature_Melfrequency(seg_id, seg, X):
 
 </p>
 </details>
+
 
 ### Feature Extractions for training data
 
@@ -220,11 +200,8 @@ X.to_csv('extract_test_Jul08.csv')
 </p>
 </details>
 
+![Test_Signal_Visualization](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Test_set_visualization.png)
 
- ![Test_Signal_Visualization](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Test_set_visualization.png)
-
-</p>
-</details>
 
 ## III. Principal Component Analysis - PCA
 
