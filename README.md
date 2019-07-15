@@ -420,6 +420,21 @@ plt.savefig('Polynomial Regression.png', dpi = 199)
 
 We use 3 different types of Tree-Classifier for this classification.
 
+### Decision Tree
+
+With Index, Validation MeanAbsoluteError: Mean = 1.717 Std = 0.083
+![Decision Tree with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/DT_withIndex.png)
+
+### Random Forest
+
+With Index, Validation MeanAbsoluteError: Mean = 1.617 Std = 0.038
+![Random Forest  with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/RF_withIndex.png)
+
+### Light Gradient Boosting Machine (LGBM)
+
+Validation MeanAbsoluteError: Mean = 0.680 Std = 0.036
+![LGBM  with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/LGBM_withIndex.png)
+
 <details><summary>CLICK TO EXPAND</summary>
 <p>
   
@@ -441,33 +456,6 @@ model = RandomForestRegressor(max_depth=5,min_samples_split=9,random_state=0,
 
 </p>
 </details>
-
-### Decision Tree
-
-With no Index, Validation MeanAbsoluteError: Mean = 2.067 Std = 0.044
-
-![Decision Tree without Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/DT_woIndex.png)
-
-With Index, Validation MeanAbsoluteError: Mean = 1.717 Std = 0.083
-![Decision Tree with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/DT_withIndex.png)
-
-### Random Forest
-
-Validation MeanAbsoluteError: Mean = 2.020 Std = 0.031
-
-![Random Forest without Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/RF_woIndex.png)
-
-With Index, Validation MeanAbsoluteError: Mean = 1.617 Std = 0.038
-![Random Forest  with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/RF_withIndex.png)
-
-### Light Gradient Boosting Machine (LGBM)
-
-Validation MeanAbsoluteError: Mean = 2.024 Std = 0.033
-
-![LGBM without Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/LGBM_woIndex.png)
-
-Validation MeanAbsoluteError: Mean = 0.680 Std = 0.036
-![LGBM  with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/LGBM_withIndex.png)
 
 
 ### Tree-based Technique Comparison
@@ -527,30 +515,58 @@ Validation MeanAbsoluteError: Mean = 2.099 Std = 0.037
 Validation MeanAbsoluteError: Mean = 2.065 Std = 0.038
 ![SVM linear with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/SVM_linear_withIndex.png)
 
-
-
 ## IV. Principal Component Analysis - PCA
 
-Principal component analysis (PCA) is a technique used for understanding the dimensional structure of a data set. PCA transforms data in a way that converts a set of orthogonally correlated observations into a set of linearly uncorrelated variables called principal components.  This transformation maximizes the largest possible variance between each principal component.
+Principal component analysis (PCA) is a technique used for understanding the dimensional structure of a data set. PCA transforms data in a way that converts a set of orthogonally correlated observations into a set of linearly uncorrelated variables called principal components.  This transformation maximizes the largest possible variance between each principal component and is a technique used to maximize the performance of a model.
 
 In this work we use three different visualization methods to help understand the dimensional structure of the data and reduce the dimensionality of the dataset using PCA. 
 
- ### Running PCA 
+### Pricipal Component Proportionality
+
+The x-axis of the graph below indicated each principal component for the featurized data set, while the y-axis accounts for the proportionality of the total variance contained within the data set. As expected, the first principal component accounts for the largest amount of variance. Each consecutive principal component accounts for slightly less variance than component before it. 
+
+The red line shows the cumulative proportional variance after each principal component is formed. The dashed line is an indication of 99% variance of the data. One can see that the dashed line crosses the cumulative sum (red) line at the 9th principal component. This indicated that 99% of the variance within the data is accounted for when the dimensionality of the data is reduced from 16 dimensions down to 9 dimensions. 
+
+
+![Principal Components Visualization](https://github.com/hoangtung167/cx4240/blob/master/Graphs/principal_component_visualization.png)
+
+### Feature Variance for Principal Components 1 & 2
+
+The two plots show the contributing variance of each feature in the first and second principal components. Yellow indicates a high positive variance while purple indicates a high negative variance. In the first principal component the features contributing to the most variance are the ‘Roll_std_pXX’ features as well as the “MFCC_mean02” feature. In the second principal component the “mean”, “FFT_std_max”, and “index” features contribute to the most variance. Knowing this correlation relationship could provide a framework for identifying the features providing the most significant variation within the model. 
+
+
+![First Principal Component](https://github.com/hoangtung167/cx4240/blob/master/Graphs/first_principal_component.png)
+
+![second Principal Component](https://github.com/hoangtung167/cx4240/blob/master/Graphs/second_principal_component.png)
+
+ ### Visualizing Feature Correlation
+
+The final graph within this section is a heat map which shows the correlation between different features. Dark red indicates that features have a strong positive correlation while dark blue indicates that there is a strong negative correlation between features. This heat map provides insight into which features are linearly independent and which variables linearly dependent. For example, the “Roll_std_p60” and “skew” features are linearly independent and have nearly zero correlation with other features. On the other hand, “Roll_std_60” is strongly correlated with 7 other features. 
+
+
+![Feature Correlation](https://github.com/hoangtung167/cx4240/blob/master/Graphs/heat_map.png)
+
+Now that we have a better understanding of the feature importance and optimal dimensionality of our dataset, we plan to train a model on the reduced dimensionality matrix to see if we can improve our prediction capabilities. 
+
+####Generate PCA Model and Visualization
 <details><summary>CLICK TO EXPAND</summary>
 <p>
-
+ 
 ```python
+#environment set up 
   import numpy as np
   import seaborn as sns
   import matplotlib.pyplot as plt
   import pandas as pd
   from sklearn.preprocessing import StandardScaler
   from sklearn.decomposition import PCA
-
+  
+#import data 
   train = pd.read_csv('extract_train_Jul08.csv')
   train = train.drop(['index'], axis = 1)
   train = train.drop(train.columns[0],axis = 1)
 
+#standardize data and fit PCA model
   scaler=StandardScaler() #instantiate
   scaler.fit(train) # compute the mean and standard which will be used in the next command
   X_scaled=scaler.transform(train)
@@ -560,15 +576,8 @@ In this work we use three different visualization methods to help understand the
   ex_variance=np.var(X_pca,axis=0)
   ex_variance_ratio = ex_variance/np.sum(ex_variance)
   print(ex_variance_ratio)
-```
-</p>
-</details>
 
- ### Pricipal Component Proportionality
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-
-```python
+#plotting PC variance proportion summation 
 plt.figure(figsize=(10,5))
 plt.bar(np.arange(1,16),pca.explained_variance_ratio_, linewidth=3)
 plt.plot(np.arange(1,16),np.cumsum(pca.explained_variance_ratio_), linewidth=3, c = 'r', label = 'Cumulative Proportion')
@@ -580,22 +589,9 @@ plt.plot([0.99]*16, '--')
 ex_variance=np.var(X_pca,axis=0)
 ex_variance_ratio = ex_variance/np.sum(ex_variance)
 print(ex_variance_ratio)
-```
-</p>
-</details>
 
-The x-axis of the graph below indicated each principal component for the featurized data set, while the y-axis accounts for the proportionality of the total variance contained within the data set. As expected, the first principal component accounts for the largest amount of variance. Each consecutive principal component accounts for slightly less variance than component before it. 
+#plot feature variance within 1st and 2nd principle component
 
-The red line shows the cumulative proportional variance after each principal component is formed. The dashed line is an indication of 99% variance of the data. One can see that the dashed line crosses the cumulative sum (red) line at the 9th principal component. This indicated that 99% of the variance within the data is accounted for when the dimensionality of the data is reduced from 16 dimensions down to 9 dimensions. 
-
-
-![Principal Components Visualization](https://github.com/hoangtung167/cx4240/blob/master/Graphs/principal_component_visualization.png)
-
- ### Feature Variance for Principal Components 1 & 2
-<details><summary>CLICK TO EXPAND</summary>
-<p>
- 
-```python
 plt.matshow([pca.components_[0]],cmap='viridis')
 plt.yticks([0],['1st Comp'],fontsize=10)
 plt.colorbar()
@@ -607,42 +603,15 @@ plt.yticks([0],['2nd Comp'],fontsize=10)
 plt.colorbar()
 plt.xticks(range(len(train.columns)),train.columns,rotation=65,ha='left')
 plt.show()
-```
-</p>
-</details>
 
-The two plots show the contributing variance of each feature in the first and second principal components. Yellow indicates a high positive variance while purple indicates a high negative variance. In the first principal component the features contributing to the most variance are the ‘Roll_std_pXX’ features as well as the “MFCC_mean02” feature. In the second principal component the “mean”, “FFT_std_max”, and “index” features contribute to the most variance. Knowing this correlation relationship could provide a framework for identifying the features providing the most significant variation within the model. 
-
-
-![First Principal Component](https://github.com/hoangtung167/cx4240/blob/master/Graphs/first_principal_component.png)
-
-![second Principal Component](https://github.com/hoangtung167/cx4240/blob/master/Graphs/second_principal_component.png)
-
- ### Visualizing Feature Correlation
-<details><summary>CLICK TO EXPAND</summary>
-<p>
- 
-```python
+#feature correlation map
 features = test.columns
 plt.figure(figsize=(8,8))
 s=sns.heatmap(test.corr(),cmap='coolwarm') 
 s.set_yticklabels(s.get_yticklabels(),rotation=30,fontsize=7)
 s.set_xticklabels(s.get_xticklabels(),rotation=30,fontsize=7)
 plt.show()
-```
-</p>
-</details>
 
-The final graph within this section is a heat map which shows the correlation between different features. Dark red indicates that features have a strong positive correlation while dark blue indicates that there is a strong negative correlation between features. This heat map provides insight into which features are linearly independent and which variables linearly dependent. For example, the “Roll_std_p60” and “skew” features are linearly independent and have nearly zero correlation with other features. On the other hand, “Roll_std_60” is strongly correlated with 7 other features. 
-
-
-![Feature Correlation](https://github.com/hoangtung167/cx4240/blob/master/Graphs/heat_map.png)
-
- ### Saving Reduced Dimensionality Matrix and Feature Importance
-<details><summary>CLICK TO EXPAND</summary>
-<p>
- 
-```python
 a = np.abs(pca.components_[0])
 a = a/np.max(a)
 df = pd.DataFrame()
@@ -651,6 +620,7 @@ df['importance'] = a
 df.to_csv('PCA_extracted.csv')
 print(df.shape)
 
+#exporting feature importance
 pca=PCA(n_components = 9) 
 pca.fit(X_scaled) 
 X_pca=pca.transform(X_scaled)
@@ -659,6 +629,8 @@ df.to_csv('pca_exported_9features.csv')
 ```
 </p>
 </details>
+
+
 
 
 ## VII. Summary
