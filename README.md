@@ -127,7 +127,7 @@ plt.subplots_adjust(wspace=0.5, hspace=0.3)
 
 ## III. Testing Maching Learning Models
 
-### IV. Linear and Polynomial Regression
+### Linear and Polynomial Regression
 
 
 ### Data Read
@@ -193,27 +193,9 @@ def mv(coefmat):
         mean[i] = np.mean(coefmat[:, i])
         var[i] = np.std(coefmat[:, i])
     return mean, var
-```
 
-</p>
-</details>
-
-### Linear Regression
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-
-#### Perform Linear Regression on the dataset
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-
-```python
 reg = LinearRegression().fit(features, target)
-
 print("The loss values is: ", mean_absolute_error(target, reg.predict(features)))
-```
-The loss values is:  2.110853811043013
-
-```python
 indx = range(target.shape[0])
 plt.axis([0, target.shape[0], -0.1, 16])
 plt.title("Comparison between predicted and actual target values")
@@ -223,18 +205,18 @@ plt.plot(indx, reg.predict(features), linewidth = 3, label = 'Pred')
 plt.plot(indx, target, linewidth = 2, label = 'Actual')
 plt.legend(loc='upper right')
 plt.savefig('Linear Regression.png', dpi = 199)
+
 ```
+</p>
+</details>
+
+
 ![Linear Regression](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Linear%20Regression.png)  
 
 ###### Analysis
 From the graph, we see that the linear regression model provide fairly acceptable prediction on the outcome - "Time before failure(s)". However, we can observe the tendency to center the values: the model can not predict high peak an show consistent trend of repeating height - nearly periodic. To combat this situation, we decided to use two different approaches: first is to use different type of regressor and compare and validate them using Kfold cross-validation, second is to use the polynomial regression. We suspect that there is no significant improvement when using different types of linear regression as all of them have a tendency to center the values.
 
-</p>
-</details>
-
 #### Compare different types of regression models
-<details><summary>CLICK TO EXPAND</summary>
-<p>
 
 ```python
 fl = ['Linear', 'Ridge', 'Lasso', 'Huber Regressor']
@@ -270,12 +252,10 @@ plt.show()
 ##### Analysis
 Just as what we predicted, using other types of regressor such as Ridge, Lasso, and Huber Regressor do not increase accuracy significantly. Specially, we event observe a worst model with Huber Regressor: higher Mean Absolute Error with higher variance
 
-</p>
-</details>
+
 
 #### Feature Importance
-<details><summary>CLICK TO EXPAND</summary>
-<p>
+
 
 We output and graphs the coefficients in the weight from linear regression model corresponding to features. This graphs will be able to tell us the gradient values of features and thus their respective importance.
 
@@ -307,8 +287,6 @@ plt.show()
 ```
 ![Bar bar_plot_with_error_bars](https://github.com/hoangtung167/cx4240/blob/master/Graphs/bar_plot_with_error_bars.png)
 
-</p>
-</details>
 
 </p>
 </details>
