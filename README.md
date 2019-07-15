@@ -46,11 +46,7 @@ The basic features are calculate using simple statistics and include ‘mean’,
 ![Top_feature 1](https://github.com/jlightstone/cs_project/blob/master/Graphs/Feature_1.png)
 ![Top feature 2](https://github.com/jlightstone/cs_project/blob/master/Graphs/Feature_2.png)
 
-### Visualization of 16 features
-
-![Feature Visualization](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Feature_Visualization.png)
-
-Once enough features from the data are extracted, one can begin train different ML algorithms to determine which is most capable of modeling the given set. In the following sectin, we test multiple algorithms in order to determine which are best at predicting the time to failure for a slip plane. The feature importance for each ML method is also discussed. 
+Once enough features from the data are extracted, one can begin train different ML algorithms to determine which is most capable of modeling the given set. In the following section, we test multiple algorithms in order to determine which are best at predicting the time to failure for a slip plane. The feature importance for each ML method is also discussed. 
 
 #### Feature Extractions Methods
 
