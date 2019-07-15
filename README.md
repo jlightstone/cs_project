@@ -10,8 +10,7 @@ Scientist have recently discovered that “constant tremors” measured along fa
 ![Introduction_Data](https://github.com/hoangtung167/cx4240/blob/master/CSV%20Files/Introduction_data.png)
 
 
-The data above is shows a continuous block of experimental data. The data shows the accoustic viabrations as a function of time. With in the data there is also a measurement of the time to failure (a.k.a. the time when the earthquake occurs). In order to predict the time to failure features must be extracted from the data and the vectorized in a time series. 
-
+The data above shows a continuous block of experimental data. This graph shows plotted accoustic viabrations as a function of time. The plot also shows a "time to failure" component (a.k.a. the time when an earthquake or fault slip occurs). In order to predict the time to failure, statistical features must be extracted from the data. The features used to describe the data are discussed in the next section. 
 
 #### Environment Setup
 <details><summary>CLICK TO EXPAND</summary>
@@ -39,15 +38,12 @@ import statistics
 
 ## II. Feature Extraction
 
-Using resourses from kaggle, we determined 16 statistical features that serve as potential candidates for understanding our the experimental data [link1](https://www.kaggle.com/c/LANL-Earthquake-Prediction/discussion/94390#latest-554034).
+Using resourses from kaggle, we determined 16 statistical features that serve as potential candidates for understanding our the experimental data [link1](https://www.kaggle.com/c/LANL-Earthquake-Prediction/discussion/94390#latest-554034). The features are broken into four different catagories- basic, fast fourier transformed, rolling window, and mel-frequency features. The basic features are calculate using simple statistics and include‘mean’, ‘std’, ‘skew’.  In order to extra the fast fourier transformed features, the time time-domain signal was converted into a frequency-domain signal. The resulted in real and imaginary numbers and the mean and standard deviation for each was calculated. 
 
-### Feature definitions
+Rolling windows (6 features)  From the 150_000 data, we choose a rolling window size = 100, at each window, we calculate the mean and standard deviation of each window. We use the numpy percentile function to calculate 5%,30%, 60% of the standard deviation (‘Roll_std_p05’,‘Roll_std_p30’,‘Roll_std_p60’), the top 5% of the mean, the mean of the gradient of these vectors (‘Roll_mean_absDiff’, ‘Roll_std_absDiff’).
 
 ![Feature Extraction Concept](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Feature_Extraction_Concept.png)
 
-**Basic features (4 features) 
-‘Index’, ‘mean’, ‘std’, ‘skew’**  
-From 150_000 data, we report the time when the signal is recorded (‘Index’), a single mean value (‘mean’), standard deviation (‘std’), and skew (‘skew’).
 
 <details><summary>CLICK TO EXPAND</summary>
 <p>
@@ -102,9 +98,7 @@ def generate_feature_Melfrequency(seg_id, seg, X):
 **Fast Fourier Transform (4 features)
 ‘FFT_mean_imag’, ‘FFT_mean_real’, ‘FFT_std_max’, ‘FFT_std_real’**
 
-Transform the time-domain signal into frequency-domain signal. Since it is complex number in the frequency-domain, I separate them into real and imaginary parts, each is reported with its mean and standard deviation. 
 
-Rolling windows (6 features)  From the 150_000 data, we choose a rolling window size = 100, at each window, we calculate the mean and standard deviation of each window. We use the numpy percentile function to calculate 5%,30%, 60% of the standard deviation (‘Roll_std_p05’,‘Roll_std_p30’,‘Roll_std_p60’), the top 5% of the mean, the mean of the gradient of these vectors (‘Roll_mean_absDiff’, ‘Roll_std_absDiff’).
 
 Mel-frequency.... We use the Librosa toolbox to calculate the Mel-frequency cepstral coefficients of the 2nd and 16th components. 
 
