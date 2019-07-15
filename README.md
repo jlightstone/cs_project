@@ -416,7 +416,7 @@ plt.savefig('Polynomial Regression.png', dpi = 199)
 </p>
 </details>
 
-## V. Decision Tree/ Random Forest / LGB Classifier
+### Decision Tree/ Random Forest / LGB Classifier
 
 We use 3 different types of Tree-Classifier for this classification.
 
@@ -424,23 +424,25 @@ We use 3 different types of Tree-Classifier for this classification.
 <p>
   
 ```python
+#import packages
 from sklearn.tree import DecisionTreeRegressor 
 from sklearn.ensemble import RandomForestRegressor
 import lightgbm as lgb
+
+#decision tree model
+model = DecisionTreeRegressor(min_samples_split = 25, random_state = 1, 
+                                  criterion='mae',max_depth=5)
+
+#random forrest
+model = RandomForestRegressor(max_depth=5,min_samples_split=9,random_state=0,
+                                  n_estimators=50,criterion='mae')
+                                 
 ```
 
 </p>
 </details>
 
 ### Decision Tree
-
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-  
-```python
-model = DecisionTreeRegressor(min_samples_split = 25, random_state = 1, 
-                                  criterion='mae',max_depth=5)
-```
 
 With no Index, Validation MeanAbsoluteError: Mean = 2.067 Std = 0.044
 
@@ -449,17 +451,13 @@ With no Index, Validation MeanAbsoluteError: Mean = 2.067 Std = 0.044
 With Index, Validation MeanAbsoluteError: Mean = 1.717 Std = 0.083
 ![Decision Tree with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/DT_withIndex.png)
 
-</p>
-</details>
-
 ### Random Forest
 
 <details><summary>CLICK TO EXPAND</summary>
 <p>
   
 ```python
-model = RandomForestRegressor(max_depth=5,min_samples_split=9,random_state=0,
-                                  n_estimators=50,criterion='mae')
+
 ```
 
 Validation MeanAbsoluteError: Mean = 2.020 Std = 0.031
@@ -474,14 +472,6 @@ With Index, Validation MeanAbsoluteError: Mean = 1.617 Std = 0.038
 
 ### Light Gradient Boosting Machine (LGBM)
 
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-  
-```python
-model = RandomForestRegressor(max_depth=5,min_samples_split=9,random_state=0,
-                                  n_estimators=50,criterion='mae')
-```
-
 Validation MeanAbsoluteError: Mean = 2.024 Std = 0.033
 
 ![LGBM without Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/LGBM_woIndex.png)
@@ -489,8 +479,6 @@ Validation MeanAbsoluteError: Mean = 2.024 Std = 0.033
 Validation MeanAbsoluteError: Mean = 0.680 Std = 0.036
 ![LGBM  with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/LGBM_withIndex.png)
 
-</p>
-</details>
 
 ### Tree-based Technique Comparison
 <details><summary>CLICK TO EXPAND</summary>
