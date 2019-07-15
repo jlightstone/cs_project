@@ -128,6 +128,18 @@ plt.subplots_adjust(wspace=0.5, hspace=0.3)
 ## III. Testing Maching Learning Models
 
 ### Linear Regression and Polynomial Regression Performance
+Analysis began with two of the most simple regression models: linear and polynomial regression. With in the linear regression framework multiple methods were tested- Ridge, Lasso, and Huber Regressor- however none performed as well as the traditional linear regression model. To optimize the Polynomial regression model we tested with different k-fold values and determined the the highest performance occured when 
+
+rom the graph, we see that the linear regression model provide fairly acceptable prediction on the outcome - "Time before failure(s)". However, we can observe the tendency to center the values: the model can not predict high peak an show consistent trend of repeating height - nearly periodic. To combat this situation, we decided to use two different approaches: first is to use different type of regressor and compare and validate them using Kfold cross-validation, second is to use the polynomial regression. We suspect that there is no significant improvement when using different types of linear regression as all of them have a tendency to center the values.
+
+![Linear Regression K Fold](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Linear%20Regression%20K%20Fold.png)
+
+
+![Polynomial K Fold](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Polynomial%20K%20Fold.png)
+
+
+![Linear Regression](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Linear%20Regression.png)  
+
 
 ![Comapare Predicted Values](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Compare%20Predicted%20Values.png)
 </p>
@@ -135,14 +147,43 @@ plt.subplots_adjust(wspace=0.5, hspace=0.3)
 ![Compare MAE](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Compare%20MAE%20Linear%20Polynomial.png)
 
 
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-
-#### Compare the Mean Absolute Error
+#### Comparing Linear and Polynomial Regression
 <details><summary>CLICK TO EXPAND</summary>
 <p>
 
 ```python
+
+#creating models and plots
+
+reg = LinearRegression().fit(features, target)
+
+indx = range(target.shape[0])
+plt.axis([0, target.shape[0], -0.1, 16])
+plt.title("Comparison - Linear Regression")
+plt.ylabel("Time before failure(s)")
+plt.xlabel("Index")
+plt.plot(indx, reg.predict(features), linewidth = 3, label = 'Pred')
+plt.plot(indx, target, linewidth = 2, label = 'Actual')
+plt.legend(loc='upper right')
+plt.savefig('Compare P Linear.png', dpi = 324)
+plt.show()
+
+poly = PolynomialFeatures(degree=2)
+features_poly = poly.fit_transform(features)
+reg = LinearRegression().fit(features_poly, target)
+
+indx = range(target.shape[0])
+plt.axis([0, target.shape[0], -0.1, 16])
+plt.title("Comparison - Polynomial Regression")
+plt.ylabel("Time before failure(s)")
+plt.xlabel("Index")
+plt.plot(indx, reg.predict(features_poly), linewidth = 3, label = 'Pred')
+plt.plot(indx, target, linewidth = 2, label = 'Actual')
+plt.legend(loc='upper right')
+plt.savefig('Compare P Polynomial.png', dpi = 324)
+plt.show()
+
+#calculating error
 fl = ['Linear Regression', 'Polynomial Regression']
 t1, m1, v1, c1 = K_Fold(features,target, degree = 1, numfolds = 5, classifier = "linear")
 t2, m2, v2, c2 = K_Fold(features,target, degree = 2, numfolds = 5, classifier = "polynomial")
@@ -181,44 +222,6 @@ plt.show()
 
 </p>
 </details>
-
-#### Comparing Linear and Polynomial Regression
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-
-```python
-reg = LinearRegression().fit(features, target)
-
-indx = range(target.shape[0])
-plt.axis([0, target.shape[0], -0.1, 16])
-plt.title("Comparison - Linear Regression")
-plt.ylabel("Time before failure(s)")
-plt.xlabel("Index")
-plt.plot(indx, reg.predict(features), linewidth = 3, label = 'Pred')
-plt.plot(indx, target, linewidth = 2, label = 'Actual')
-plt.legend(loc='upper right')
-plt.savefig('Compare P Linear.png', dpi = 324)
-plt.show()
-
-poly = PolynomialFeatures(degree=2)
-features_poly = poly.fit_transform(features)
-reg = LinearRegression().fit(features_poly, target)
-
-indx = range(target.shape[0])
-plt.axis([0, target.shape[0], -0.1, 16])
-plt.title("Comparison - Polynomial Regression")
-plt.ylabel("Time before failure(s)")
-plt.xlabel("Index")
-plt.plot(indx, reg.predict(features_poly), linewidth = 3, label = 'Pred')
-plt.plot(indx, target, linewidth = 2, label = 'Actual')
-plt.legend(loc='upper right')
-plt.savefig('Compare P Polynomial.png', dpi = 324)
-plt.show()
-```
-
-</details>
-
-
 
 ### Linear Regression 
 <details><summary>CLICK TO EXPAND</summary>
@@ -394,17 +397,15 @@ plt.show()
 </p>
 </details>
 
-![Linear Regression](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Linear%20Regression.png)  
 
 ###### Analysis
-From the graph, we see that the linear regression model provide fairly acceptable prediction on the outcome - "Time before failure(s)". However, we can observe the tendency to center the values: the model can not predict high peak an show consistent trend of repeating height - nearly periodic. To combat this situation, we decided to use two different approaches: first is to use different type of regressor and compare and validate them using Kfold cross-validation, second is to use the polynomial regression. We suspect that there is no significant improvement when using different types of linear regression as all of them have a tendency to center the values.
-
+F
 #### Compare different types of regression models
 
-![Linear Regression K Fold](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Linear%20Regression%20K%20Fold.png)
+
 
 ##### Analysis
-Just as what we predicted, using other types of regressor such as Ridge, Lasso, and Huber Regressor do not increase accuracy significantly. Specially, we event observe a worst model with Huber Regressor: higher Mean Absolute Error with higher variance
+Just as what we predicted, using other types of regressor such as  do not increase accuracy significantly. Specially, we event observe a worst model with Huber Regressor: higher Mean Absolute Error with higher variance
 
 
 
@@ -421,7 +422,7 @@ We output and graphs the coefficients in the weight from linear regression model
 
 
 
-![Polynomial K Fold](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Polynomial%20K%20Fold.png)
+
 
 ##### Analysis
 From the graph, we can observe that the Mean Absolute Error has a tendency to increase with degree levels. Furthermore, the variance also increases significantly which implies that we may overfit the data with higher order models. Since degree equals 1 is the Linear Regression model, we decide to use degree of 2 to continue our analysis.
