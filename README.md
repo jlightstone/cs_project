@@ -68,24 +68,6 @@ def generate_feature_basic(seg_id, seg, X):
     X.loc[seg_id,'std'] = xc.std()
     #X.loc[seg_id, 'kurt'] = xc.kurtosis()
     X.loc[seg_id, 'skew'] = xc.skew()
-```
-
-</p>
-</details>
-
-**Fast Fourier Transform (4 features)
-‘FFT_mean_imag’, ‘FFT_mean_real’, ‘FFT_std_max’, ‘FFT_std_real’**
-
-Transform the time-domain signal into frequency-domain signal. Since it is complex number in the frequency-domain, I separate them into real and imaginary parts, each is reported with its mean and standard deviation. 
-
-Rolling windows (6 features)  From the 150_000 data, we choose a rolling window size = 100, at each window, we calculate the mean and standard deviation of each window. We use the numpy percentile function to calculate 5%,30%, 60% of the standard deviation (‘Roll_std_p05’,‘Roll_std_p30’,‘Roll_std_p60’), the top 5% of the mean, the mean of the gradient of these vectors (‘Roll_mean_absDiff’, ‘Roll_std_absDiff’).
-
-Mel-frequency.... We use the Librosa toolbox to calculate the Mel-frequency cepstral coefficients of the 2nd and 16th components. 
-
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-  
-```python
 def generate_feature_FFT(seg_id, seg, X):
     xc = pd.Series(seg['acoustic_data'].values)
     zc = np.fft.fft(xc)
@@ -123,6 +105,17 @@ def generate_feature_Melfrequency(seg_id, seg, X):
 </p>
 </details>
 
+**Fast Fourier Transform (4 features)
+‘FFT_mean_imag’, ‘FFT_mean_real’, ‘FFT_std_max’, ‘FFT_std_real’**
+
+Transform the time-domain signal into frequency-domain signal. Since it is complex number in the frequency-domain, I separate them into real and imaginary parts, each is reported with its mean and standard deviation. 
+
+Rolling windows (6 features)  From the 150_000 data, we choose a rolling window size = 100, at each window, we calculate the mean and standard deviation of each window. We use the numpy percentile function to calculate 5%,30%, 60% of the standard deviation (‘Roll_std_p05’,‘Roll_std_p30’,‘Roll_std_p60’), the top 5% of the mean, the mean of the gradient of these vectors (‘Roll_mean_absDiff’, ‘Roll_std_absDiff’).
+
+Mel-frequency.... We use the Librosa toolbox to calculate the Mel-frequency cepstral coefficients of the 2nd and 16th components. 
+
+
+
 
 ### Feature Extractions for training data
 
@@ -151,6 +144,8 @@ y.to_csv('extract_label_Jul08.csv')
 
 ### Visualization of 16 features
 
+![Feature Visualization](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Feature_Visualization.png)
+
 <details><summary>CLICK TO EXPAND</summary>
 <p>
   
@@ -169,7 +164,6 @@ plt.subplots_adjust(wspace=0.5, hspace=0.3)
 </p>
 </details>
 
- ![Feature Visualization](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Feature_Visualization.png)
 
 
 ## III. Principal Component Analysis - PCA
