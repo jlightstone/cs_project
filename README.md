@@ -142,8 +142,11 @@ From the graph, we can observe that the Mean Absolute Error has a tendency to in
 
 To yield better results, we decided to turn more complex modeling methods including 
 
-
-#### Comparing Linear and Polynomial Regression
+### Linear and Polynomial Regression Analysis
+<details><summary>CLICK TO EXPAND</summary>
+<p>
+  
+## Comparing Linear and Polynomial Regression
 <details><summary>CLICK TO EXPAND</summary>
 <p>
 
@@ -219,7 +222,7 @@ plt.show()
 </p>
 </details>
 
-### Linear Regression 
+## Linear Regression 
 <details><summary>CLICK TO EXPAND</summary>
 <p>
 
@@ -354,7 +357,7 @@ plt.show()
 </p>
 </details>
 
-### Polynomial Regression 
+## Polynomial Regression 
 <details><summary>CLICK TO EXPAND</summary>
 <p>
   
@@ -393,6 +396,8 @@ plt.show()
 </p>
 </details>
 
+</p>
+</details>
 #### Feature Importance
 
 We output and graphs the coefficients in the weight from linear regression model corresponding to features. This graphs will be able to tell us the gradient values of features and thus their respective importance.
