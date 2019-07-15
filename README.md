@@ -43,7 +43,8 @@ Using resourses from [kaggle](https://www.kaggle.com/c/LANL-Earthquake-Predictio
 
 The basic features are calculate using simple statistics and include ‘mean’, ‘std’, and ‘skew’.  The fast fourier transformed features convert the time-domain signal into a frequency-domain signal, which results in real and imaginary numbers. The mean and standard deviation for the real and imaginary numbers were calculated, resulting in 4 more features. The rolling windows method resulted from breaking the larger data set into a rolling window size of 100. From this, the mean, standard deviation, and upper and lower percentiles subsets were used to extract an additional six features. Lastly, the Librosa toolbox was used to calculate the Mel-frequency cepstral coefficients of two features. 
 
-![Feature Extraction Concept](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Feature_Extraction_Concept.png)
+![Top_feature 1](https://github.com/jlightstone/cs_project/blob/master/Graphs/Feature_1.png)
+![Top feature 2](https://github.com/jlightstone/cs_project/blob/master/Graphs/Feature_2.png)
 
 ### Visualization of 16 features
 
