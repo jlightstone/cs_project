@@ -45,13 +45,16 @@ The basic features are calculate using simple statistics and include ‘mean’,
 
 ![Feature Extraction Concept](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Feature_Extraction_Concept.png)
 
+### Visualization of 16 features
+
+![Feature Visualization](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Feature_Visualization.png)
+
 ### Feature Extractions Methods
 
 <details><summary>CLICK TO EXPAND</summary>
 <p>
   
 ```python
-
 def generate_feature_basic(seg_id, seg, X):
     xc = pd.Series(seg['acoustic_data'].values)
     
@@ -106,18 +109,6 @@ for seg_id, seg in tqdm_notebook(enumerate(CsvFileReader)):
 
 X.to_csv('extract_train_Jul08.csv')
 y.to_csv('extract_label_Jul08.csv')
-```
-</p>
-</details>
-
-### Visualization of 16 features
-
-![Feature Visualization](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Feature_Visualization.png)
-
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-  
-```python
 X1, y1 = X.iloc[500:1000], y.iloc[500:1000]
 
 plt.figure(figsize=(15, 15))
