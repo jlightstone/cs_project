@@ -415,19 +415,11 @@ plt.savefig('Polynomial Regression.png', dpi = 199)
 
 ### Decision Tree/ Random Forest / LGB Classifier
 
-We use 3 different types of Tree-Classifier for this classification.
+We use 3 different types of Tree-Classifier methods including Decision Tree, Random Forest, and LGB classifier. We build two models with each model and used a five fold cross validation framework. The first set of models use all 16 features while the second set of models do not account for the feature 'index' (time dependent variable). In the graph below, it is clear that the LGB model with the 'index' feature performs the best. It has a MAE nearly 2.5X smaller than the next best model. 
 
-### Decision Tree
+![Tree_score](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Tree_score.png)
 
-With Index, Validation MeanAbsoluteError: Mean = 1.717 Std = 0.083
-![Decision Tree with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/DT_withIndex.png)
-
-### Random Forest
-
-With Index, Validation MeanAbsoluteError: Mean = 1.617 Std = 0.038
-![Random Forest  with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/RF_withIndex.png)
-
-### Light Gradient Boosting Machine (LGBM)
+The results from the LGB model with the 'index' feature is displayed below. By simply doing a visual check one can already tell there is a significant improvement from the polynomial and linear regression models. In particular this model is now able to account for nonuniformities in peak height. Additionally, the important features are shown in the bar graph. It emphasized the importance of knowing time component of the singal under analysis. 
 
 Validation MeanAbsoluteError: Mean = 0.680 Std = 0.036
 ![LGBM  with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/LGBM_withIndex.png)
@@ -452,14 +444,6 @@ model = RandomForestRegressor(max_depth=5,min_samples_split=9,random_state=0,
 </p>
 </details>
 
-### Tree-based Technique Comparison
-  
-Cross Validation score for 5 folds:
-![Tree_score](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Tree_score.png)
-
-Features Importance:
-![Tree_feature_importance](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Tree_feature_importance.png)
-  
 ## IV. SVM/ Neural Nets
 
 ### Nerual Net (NN)
