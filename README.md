@@ -170,37 +170,6 @@ plt.subplots_adjust(wspace=0.5, hspace=0.3)
 </details>
 
  ![Feature Visualization](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Feature_Visualization.png)
- 
- ### Load the test data and Visualize
-
-The test data does not provide the information on the time when the data is recorded. We believe this information is encoded inside the segment ID in heximal form. Nonetheless, we can make the prediction with the rest of 15 features.
-
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-  
-```python
-submission = pd.read_csv('sample_submission.csv', index_col='seg_id')
-X_test = pd.DataFrame()
-plt.figure(figsize=(16,10))
-plt.subplots_adjust(wspace=0.5, hspace=0.6)
-for ii,seg_name in tqdm_notebook(enumerate(submission.index)):
-    seg = pd.read_csv('test/{}.csv'.format(seg_name))
-    generate_feature_basic(seg_name, seg, X_test)
-    generate_feature_FFT(seg_name, seg,  X_test)
-    generate_feature_Roll(seg_name, seg,  X_test)
-    generate_feature_Melfrequency(seg_name, seg,  X_test)
-    
-    if ii<18:
-        ax1 = plt.subplot(3, 6, ii + 1)
-        plt.plot(seg['acoustic_data'].values, color='blue')
-        plt.title(seg_name)
-X.to_csv('extract_test_Jul08.csv')
-```
-
-</p>
-</details>
-
-![Test_Signal_Visualization](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Test_set_visualization.png)
 
 
 ## III. Principal Component Analysis - PCA
