@@ -392,35 +392,14 @@ tot = np.delete(tot, 0)
 plt.tight_layout()
 plt.savefig('Polynomial K Fold.png', dpi = 199)
 plt.show()
-```  
-</p>
-</details>
 
-</p>
-</details>
-#### Feature Importance
-
-We output and graphs the coefficients in the weight from linear regression model corresponding to features. This graphs will be able to tell us the gradient values of features and thus their respective importance.
-
-### Polynomial Regression
-
-#### Perform K-Fold to analyze and determine optimal degree
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-
-#### Perform Polynomial Regression with Degree of 2
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-
-```python
+#fitting 2nd degree olynomial model 
 poly = PolynomialFeatures(degree=2)
 features_poly = poly.fit_transform(features)
 reg = LinearRegression().fit(features_poly, target)
-
 print("The loss values is: ", mean_absolute_error(target, reg.predict(features_poly)))
-```
-The loss values is:  1.985654086901071
-```python
+
+#plotting prediction results 
 indx = range(target.shape[0])
 plt.axis([0, target.shape[0], -0.1, 16])
 plt.title("Comparison between predicted and actual target values")
@@ -430,18 +409,9 @@ plt.plot(indx, reg.predict(features_poly), linewidth = 3, label = 'Pred')
 plt.plot(indx, target, linewidth = 2, label = 'Actual')
 plt.legend(loc='upper right')
 plt.savefig('Polynomial Regression.png', dpi = 199)
-```
-![Polynomial Regression](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Polynomial%20Regression.png)
+```  
 </p>
 </details>
-
-</p>
-</details>
-
-
-</p>
-</details>
-
 
 ## V. Decision Tree/ Random Forest / LGB Classifier
 
