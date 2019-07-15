@@ -127,7 +127,97 @@ plt.subplots_adjust(wspace=0.5, hspace=0.3)
 
 ## III. Testing Maching Learning Models
 
-### Linear and Polynomial Regression
+### Linear Regression and Polynomial Regression Performance
+
+![Comapare Predicted Values](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Compare%20Predicted%20Values.png)
+</p>
+
+![Compare MAE](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Compare%20MAE%20Linear%20Polynomial.png)
+
+
+<details><summary>CLICK TO EXPAND</summary>
+<p>
+
+#### Compare the Mean Absolute Error
+<details><summary>CLICK TO EXPAND</summary>
+<p>
+
+```python
+fl = ['Linear Regression', 'Polynomial Regression']
+t1, m1, v1, c1 = K_Fold(features,target, degree = 1, numfolds = 5, classifier = "linear")
+t2, m2, v2, c2 = K_Fold(features,target, degree = 2, numfolds = 5, classifier = "polynomial")
+mae = np.append(m1, m2)
+var = np.append(v1,v2)
+## coeff = reg.coef_.shape
+materials = fl
+x_pos = np.arange(len(fl))
+CTEs = mae
+error = var
+# Build the plot
+fig, ax = plt.subplots(1,2,figsize =(9,3))
+ax[0].bar(x_pos, CTEs, yerr=error, align='center', color = ['red', 'green'], alpha=0.5, ecolor='black', capsize=10)
+ax[0].set_ylim(0, 3)
+ax[0].set_ylabel('Mean Absolute Error')
+ax[0].set_xticks(x_pos)
+ax[0].set_xticklabels(materials)
+ax[0].set_title('Kfold results')
+ax[0].yaxis.grid(True)
+
+CTEs = [2.110853811043013, 1.985654086901071]
+
+ax[1].bar(x_pos, CTEs, align='center', color = ['red', 'green'], alpha=0.5, ecolor='black', capsize=10)
+ax[1].set_ylim(0, 3)
+ax[1].set_ylabel('Mean Absolute Error')
+ax[1].set_xticks(x_pos)
+ax[1].set_xticklabels(materials)
+ax[1].set_title('Training the whole set')
+ax[1].yaxis.grid(True)
+
+# Save the figure and show
+plt.tight_layout()
+plt.savefig('Compare MAE Linear Polynomial.png', dpi = 199)
+plt.show()
+```
+
+</p>
+</details>
+
+#### Comparing Linear and Polynomial Regression
+<details><summary>CLICK TO EXPAND</summary>
+<p>
+
+```python
+reg = LinearRegression().fit(features, target)
+
+indx = range(target.shape[0])
+plt.axis([0, target.shape[0], -0.1, 16])
+plt.title("Comparison - Linear Regression")
+plt.ylabel("Time before failure(s)")
+plt.xlabel("Index")
+plt.plot(indx, reg.predict(features), linewidth = 3, label = 'Pred')
+plt.plot(indx, target, linewidth = 2, label = 'Actual')
+plt.legend(loc='upper right')
+plt.savefig('Compare P Linear.png', dpi = 324)
+plt.show()
+
+poly = PolynomialFeatures(degree=2)
+features_poly = poly.fit_transform(features)
+reg = LinearRegression().fit(features_poly, target)
+
+indx = range(target.shape[0])
+plt.axis([0, target.shape[0], -0.1, 16])
+plt.title("Comparison - Polynomial Regression")
+plt.ylabel("Time before failure(s)")
+plt.xlabel("Index")
+plt.plot(indx, reg.predict(features_poly), linewidth = 3, label = 'Pred')
+plt.plot(indx, target, linewidth = 2, label = 'Actual')
+plt.legend(loc='upper right')
+plt.savefig('Compare P Polynomial.png', dpi = 324)
+plt.show()
+```
+
+</details>
+
 
 
 ### Linear Regression 
@@ -369,91 +459,6 @@ plt.savefig('Polynomial Regression.png', dpi = 199)
 </p>
 </details>
 
-### Comparison between Linear and Polynomial Regression
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-
-#### Compare the Mean Absolute Error
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-
-```python
-fl = ['Linear Regression', 'Polynomial Regression']
-t1, m1, v1, c1 = K_Fold(features,target, degree = 1, numfolds = 5, classifier = "linear")
-t2, m2, v2, c2 = K_Fold(features,target, degree = 2, numfolds = 5, classifier = "polynomial")
-mae = np.append(m1, m2)
-var = np.append(v1,v2)
-## coeff = reg.coef_.shape
-materials = fl
-x_pos = np.arange(len(fl))
-CTEs = mae
-error = var
-# Build the plot
-fig, ax = plt.subplots(1,2,figsize =(9,3))
-ax[0].bar(x_pos, CTEs, yerr=error, align='center', color = ['red', 'green'], alpha=0.5, ecolor='black', capsize=10)
-ax[0].set_ylim(0, 3)
-ax[0].set_ylabel('Mean Absolute Error')
-ax[0].set_xticks(x_pos)
-ax[0].set_xticklabels(materials)
-ax[0].set_title('Kfold results')
-ax[0].yaxis.grid(True)
-
-CTEs = [2.110853811043013, 1.985654086901071]
-
-ax[1].bar(x_pos, CTEs, align='center', color = ['red', 'green'], alpha=0.5, ecolor='black', capsize=10)
-ax[1].set_ylim(0, 3)
-ax[1].set_ylabel('Mean Absolute Error')
-ax[1].set_xticks(x_pos)
-ax[1].set_xticklabels(materials)
-ax[1].set_title('Training the whole set')
-ax[1].yaxis.grid(True)
-
-# Save the figure and show
-plt.tight_layout()
-plt.savefig('Compare MAE Linear Polynomial.png', dpi = 199)
-plt.show()
-```
-![Compare MAE](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Compare%20MAE%20Linear%20Polynomial.png)
-
-</p>
-</details>
-
-#### Compare the Predicted Results
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-
-```python
-reg = LinearRegression().fit(features, target)
-
-indx = range(target.shape[0])
-plt.axis([0, target.shape[0], -0.1, 16])
-plt.title("Comparison - Linear Regression")
-plt.ylabel("Time before failure(s)")
-plt.xlabel("Index")
-plt.plot(indx, reg.predict(features), linewidth = 3, label = 'Pred')
-plt.plot(indx, target, linewidth = 2, label = 'Actual')
-plt.legend(loc='upper right')
-plt.savefig('Compare P Linear.png', dpi = 324)
-plt.show()
-
-poly = PolynomialFeatures(degree=2)
-features_poly = poly.fit_transform(features)
-reg = LinearRegression().fit(features_poly, target)
-
-indx = range(target.shape[0])
-plt.axis([0, target.shape[0], -0.1, 16])
-plt.title("Comparison - Polynomial Regression")
-plt.ylabel("Time before failure(s)")
-plt.xlabel("Index")
-plt.plot(indx, reg.predict(features_poly), linewidth = 3, label = 'Pred')
-plt.plot(indx, target, linewidth = 2, label = 'Actual')
-plt.legend(loc='upper right')
-plt.savefig('Compare P Polynomial.png', dpi = 324)
-plt.show()
-```
-![Comapare Predicted Values](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Compare%20Predicted%20Values.png)
-</p>
-</details>
 
 </p>
 </details>
