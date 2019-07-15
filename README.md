@@ -461,7 +461,7 @@ model = SVR(kernel='rbf')
 
 ### Decision Tree/ Random Forest / LGB Classifier
 
-We use 3 different types of Tree-Classifier methods including Decision Tree, Random Forest, and LGB classifier. We build two models with each model and used a five fold cross validation framework. The first set of models use all 16 features while the second set of models do not account for the feature 'index' (time dependent variable). In the graph below, it is clear that the LGB model with the 'index' feature performs the best. It has a MAE nearly 2.5X smaller than the next best model. 
+We use 3 different types of Tree-Classifier methods including Decision Tree, Random Forest, and LGB classifier. We build two models with each model and used a five fold cross validation framework. The first set of models use all 16 features while the second set of models do not account for the feature 'index' (time dependent variable). In the graph below, it is clear that the LGB model with the 'index' feature performs the best. It has a MAE over 2x smaller than the next best model. 
 
 ![Tree_score](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Tree_score.png)
 
