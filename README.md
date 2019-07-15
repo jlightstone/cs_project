@@ -130,7 +130,7 @@ plt.subplots_adjust(wspace=0.5, hspace=0.3)
 ### Linear and Polynomial Regression
 
 
-### Data Read
+### Linear Regression 
 <details><summary>CLICK TO EXPAND</summary>
 <p>
 
@@ -181,9 +181,9 @@ def K_Fold(features, target, degree, numfolds, classifier):
         if (i < numfolds):
             mae[i-1] = mean_absolute_error(target_test, reg.predict(features_poly_test))
 
-avrmae = (sum(mae)/(numfolds-1))
-var = (statistics.variance(mae))
-return mae, avrmae, var, coef
+        avrmae = (sum(mae)/(numfolds-1))
+        var = (statistics.variance(mae))
+        return mae, avrmae, var, coef
 
 def mv(coefmat):
     
@@ -206,19 +206,7 @@ plt.plot(indx, target, linewidth = 2, label = 'Actual')
 plt.legend(loc='upper right')
 plt.savefig('Linear Regression.png', dpi = 199)
 
-```
-</p>
-</details>
-
-
-![Linear Regression](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Linear%20Regression.png)  
-
-###### Analysis
-From the graph, we see that the linear regression model provide fairly acceptable prediction on the outcome - "Time before failure(s)". However, we can observe the tendency to center the values: the model can not predict high peak an show consistent trend of repeating height - nearly periodic. To combat this situation, we decided to use two different approaches: first is to use different type of regressor and compare and validate them using Kfold cross-validation, second is to use the polynomial regression. We suspect that there is no significant improvement when using different types of linear regression as all of them have a tendency to center the values.
-
-#### Compare different types of regression models
-
-```python
+#different linear regression types 
 fl = ['Linear', 'Ridge', 'Lasso', 'Huber Regressor']
 ## coeff = reg.coef_.shape
 materials = fl
@@ -232,6 +220,7 @@ mae = [m, m1, m2, m3]
 var = [v, v1, v2, v3]
 CTEs = mae
 error = var
+
 # Build the plot
 fig, ax = plt.subplots()
 ax.bar(x_pos, CTEs, yerr=error, align='center', color = ['black', 'red', 'green', 'blue', 'cyan'], alpha=0.5, ecolor='black', capsize=10)
@@ -246,20 +235,8 @@ ax.yaxis.grid(True)
 plt.tight_layout()
 plt.savefig('Linear Regression K Fold.png', dpi = 199)
 plt.show()
-```
-![Linear Regression K Fold](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Linear%20Regression%20K%20Fold.png)
 
-##### Analysis
-Just as what we predicted, using other types of regressor such as Ridge, Lasso, and Huber Regressor do not increase accuracy significantly. Specially, we event observe a worst model with Huber Regressor: higher Mean Absolute Error with higher variance
-
-
-
-#### Feature Importance
-
-
-We output and graphs the coefficients in the weight from linear regression model corresponding to features. This graphs will be able to tell us the gradient values of features and thus their respective importance.
-
-```python
+#feature importance
 fl = ['index', 'mean', 'std', 'skew', 'FFT_mean_real', 'FFT_mean_imag',
      'FFT_std_real', 'FFT_std_max', 'Roll_std_p05', 'Roll_std_p30',
       'Roll_std_p60', 'Roll_std_absDiff', 'Roll_mean_p05',
@@ -285,21 +262,15 @@ plt.tight_layout()
 plt.savefig('bar_plot_with_error_bars.png', dpi = 199)
 plt.show()
 ```
-![Bar bar_plot_with_error_bars](https://github.com/hoangtung167/cx4240/blob/master/Graphs/bar_plot_with_error_bars.png)
-
-
 </p>
 </details>
 
-### Polynomial Regression
+### Polynomial Regression 
 <details><summary>CLICK TO EXPAND</summary>
 <p>
-
-#### Perform K-Fold to analyze and determine optimal degree
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-
+  
 ```python
+  
 fl = ['1','2','3','4']
 i = np.array([1,2,3,4])
 ## coeff = reg.coef_.shape
@@ -329,7 +300,37 @@ tot = np.delete(tot, 0)
 plt.tight_layout()
 plt.savefig('Polynomial K Fold.png', dpi = 199)
 plt.show()
-```
+```  
+</p>
+</details>
+
+![Linear Regression](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Linear%20Regression.png)  
+
+###### Analysis
+From the graph, we see that the linear regression model provide fairly acceptable prediction on the outcome - "Time before failure(s)". However, we can observe the tendency to center the values: the model can not predict high peak an show consistent trend of repeating height - nearly periodic. To combat this situation, we decided to use two different approaches: first is to use different type of regressor and compare and validate them using Kfold cross-validation, second is to use the polynomial regression. We suspect that there is no significant improvement when using different types of linear regression as all of them have a tendency to center the values.
+
+#### Compare different types of regression models
+
+![Linear Regression K Fold](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Linear%20Regression%20K%20Fold.png)
+
+##### Analysis
+Just as what we predicted, using other types of regressor such as Ridge, Lasso, and Huber Regressor do not increase accuracy significantly. Specially, we event observe a worst model with Huber Regressor: higher Mean Absolute Error with higher variance
+
+
+
+#### Feature Importance
+
+We output and graphs the coefficients in the weight from linear regression model corresponding to features. This graphs will be able to tell us the gradient values of features and thus their respective importance.
+
+### Polynomial Regression
+
+#### Perform K-Fold to analyze and determine optimal degree
+<details><summary>CLICK TO EXPAND</summary>
+<p>
+
+
+
+
 ![Polynomial K Fold](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Polynomial%20K%20Fold.png)
 
 ##### Analysis
