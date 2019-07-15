@@ -142,11 +142,11 @@ From the graph, we can observe that the Mean Absolute Error has a tendency to in
 
 To yield better results, we decided to turn more complex modeling methods including 
 
-### Linear and Polynomial Regression Analysis
+## Linear and Polynomial Regression Analysis
 <details><summary>CLICK TO EXPAND</summary>
 <p>
   
-## Comparing Linear and Polynomial Regression
+### Comparing Linear and Polynomial Regression
 <details><summary>CLICK TO EXPAND</summary>
 <p>
 
@@ -222,7 +222,7 @@ plt.show()
 </p>
 </details>
 
-## Linear Regression 
+### Linear Regression 
 <details><summary>CLICK TO EXPAND</summary>
 <p>
 
@@ -357,7 +357,7 @@ plt.show()
 </p>
 </details>
 
-## Polynomial Regression 
+### Polynomial Regression 
 <details><summary>CLICK TO EXPAND</summary>
 <p>
   
@@ -410,6 +410,9 @@ plt.plot(indx, target, linewidth = 2, label = 'Actual')
 plt.legend(loc='upper right')
 plt.savefig('Polynomial Regression.png', dpi = 199)
 ```  
+</p>
+</details>
+
 </p>
 </details>
 
