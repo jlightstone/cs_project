@@ -10,6 +10,8 @@ Scientist have recently discovered that “constant tremors” measured along fa
 ![Introduction_Data](https://github.com/hoangtung167/cx4240/blob/master/CSV%20Files/Introduction_data.png)
 
 
+The data above is shows a continuous block of experimental data. The data shows the accoustic viabrations as a function of time. With in the data there is also a measurement of the time to failure (a.k.a. the time when the earthquake occurs). In order to predict the time to failure features must be extracted from the data and the vectorized in a time series. 
+
 
 #### Environment Setup
 <details><summary>CLICK TO EXPAND</summary>
@@ -32,20 +34,12 @@ from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold
 import statistics 
 ```
-
 </p>
 </details>
 
 ## II. Feature Extraction
 
-
-From the 150_000 acoustic data containing “random” number, we transform this entire time-series window (each has 150_000 data) into 16 statistical features. The features is selected based on the following public release:
-
-
-[link1](https://www.kaggle.com/c/LANL-Earthquake-Prediction/discussion/94390#latest-554034)
-[link2](https://www.kaggle.com/gpreda/lanl-earthquake-eda-and-prediction)
-[link3](https://www.kaggle.com/artgor/seismic-data-eda-and-baseline)
-
+Using resourses from kaggle, we determined 16 statistical features that serve as potential candidates for understanding our the experimental data [link1](https://www.kaggle.com/c/LANL-Earthquake-Prediction/discussion/94390#latest-554034).
 
 ### Feature definitions
 
