@@ -429,7 +429,7 @@ Validation MeanAbsoluteError: Mean = 2.071 Std = 0.034
 Validation MeanAbsoluteError: Mean = 2.065 Std = 0.038
 ![SVM linear with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/SVM_linear_withIndex.png)
 
-####Building NN and SVM
+#### Building NN and SVM
 
 <details><summary>CLICK TO EXPAND</summary>
 <p>
@@ -490,7 +490,7 @@ model = RandomForestRegressor(max_depth=5,min_samples_split=9,random_state=0,
 </p>
 </details>
 
-###Identifying the Best Model
+### Identifying the Best Model
 
 In the figure below the MAE score with five-fold cross validation is reported for every model build during our prelimiary steps. It is clear that the LGBM (with index) model results in the lowest MAE. Based upon this analysis, moving forward it our goal to optimize the performance of this model. We are going to use PCA to reduce the dimensionality of our data set. It is our belief that reducing the dimensionality of our dataset will result in a increase performance of the LGB model. PCA work is addressed in the following section. 
 
@@ -531,7 +531,7 @@ The final graph within this section is a heat map which shows the correlation be
 
 Now that we have a better understanding of the feature importance and optimal dimensionality of our dataset, we plan to train a model on the reduced dimensionality matrix to see if we can improve our prediction capabilities. 
 
-####Generate PCA Model and Visualization
+#### Generate PCA Model and Visualization
 <details><summary>CLICK TO EXPAND</summary>
 <p>
  
