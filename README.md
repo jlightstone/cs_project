@@ -142,7 +142,7 @@ From the graph, we can observe that the Mean Absolute Error has a tendency to in
 
 To yield better results, we decided to turn more complex modeling methods including 
 
-## Linear and Polynomial Regression Analysis
+### Linear and Polynomial Regression Analysis
 <details><summary>CLICK TO EXPAND</summary>
 <p>
   
