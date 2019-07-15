@@ -450,13 +450,10 @@ model = DecisionTreeRegressor(min_samples_split = 25, random_state = 1,
 
 #random forrest
 model = RandomForestRegressor(max_depth=5,min_samples_split=9,random_state=0,
-                                  n_estimators=50,criterion='mae')
-                                 
+                                  n_estimators=50,criterion='mae')                                
 ```
-
 </p>
 </details>
-
 
 ### Tree-based Technique Comparison
   
@@ -466,7 +463,23 @@ Cross Validation score for 5 folds:
 Features Importance:
 ![Tree_feature_importance](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Tree_feature_importance.png)
   
-## VI. SVM/ Neural Nets
+## IV. SVM/ Neural Nets
+
+### Nerual Net (NN)
+
+Validation MeanAbsoluteError: Mean = 2.113 Std = 0.033
+
+![NN without Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/NN_without_Index.png)
+
+Validation MeanAbsoluteError: Mean = 2.071 Std = 0.034
+![NN with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/NN_with_index.png)
+
+### Support Vector Machine (SVM)
+  
+Validation MeanAbsoluteError: Mean = 2.065 Std = 0.038
+![SVM linear with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/SVM_linear_withIndex.png)
+
+####Building NN and SVM
 <details><summary>CLICK TO EXPAND</summary>
 <p>
   
@@ -492,30 +505,10 @@ model = SVR(kernel='linear')
 model = SVR(kernel='rbf')
 
 ```
-
 </p>
 </details>
 
-### Nerual Net (NN)
-
-Validation MeanAbsoluteError: Mean = 2.113 Std = 0.033
-
-![NN without Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/NN_without_Index.png)
-
-Validation MeanAbsoluteError: Mean = 2.071 Std = 0.034
-![NN with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/NN_with_index.png)
-
-
-### Support Vector Machine (SVM)
-  
-Validation MeanAbsoluteError: Mean = 2.099 Std = 0.037
-
-![SVM linear without Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/SVM_linear_withoutIndex.png)
-
-Validation MeanAbsoluteError: Mean = 2.065 Std = 0.038
-![SVM linear with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/SVM_linear_withIndex.png)
-
-## IV. Principal Component Analysis - PCA
+## V. Principal Component Analysis - PCA
 
 Principal component analysis (PCA) is a technique used for understanding the dimensional structure of a data set. PCA transforms data in a way that converts a set of orthogonally correlated observations into a set of linearly uncorrelated variables called principal components.  This transformation maximizes the largest possible variance between each principal component and is a technique used to maximize the performance of a model.
 
@@ -630,10 +623,7 @@ df.to_csv('pca_exported_9features.csv')
 </p>
 </details>
 
-
-
-
-## VII. Summary
+## VI. Summary
 
 #### Compare the loss values and variances across methods
 
