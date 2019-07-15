@@ -489,6 +489,13 @@ model = RandomForestRegressor(max_depth=5,min_samples_split=9,random_state=0,
 </p>
 </details>
 
+###Identifying the Best Model
+
+In the figure below the MAE score with five-fold cross validation is reported for every model build during our prelimiary steps. It is clear that the LGBM (with index) model results in the lowest MAE. Based upon this analysis, moving forward it our goal to optimize the performance of this model. We are going to use PCA to reduce the dimensionality of our data set. It is our belief that reducing the dimensionality of our dataset will result in a increase performance of the LGB model. PCA work is addressed in the following section. 
+
+#### Compare the loss values and variances across methods
+
+![Summary_MAE_Score](https://github.com/hoangtung167/cx4240/blob/master/CSV%20Files/Summary_MAE_Score.png)
 
 ## V. Principal Component Analysis - PCA
 
@@ -607,10 +614,7 @@ df.to_csv('pca_exported_9features.csv')
 
 ## VI. Summary
 
-#### Compare the loss values and variances across methods
-
-![Summary_MAE_Score](https://github.com/hoangtung167/cx4240/blob/master/CSV%20Files/Summary_MAE_Score.png)
-
-#### Compare the feature importance across methods
+#### Comparing the feature importance across methods
 
 ![Summary_Feature_Importance](https://github.com/hoangtung167/cx4240/blob/master/CSV%20Files/Summary_Feature_Importance.png)
+
