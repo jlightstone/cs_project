@@ -137,7 +137,7 @@ From the graph, we can observe that the Mean Absolute Error has a tendency to in
 
 ![Compare MAE](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Compare%20MAE%20Linear%20Polynomial.png)
 
-To yield better results, we decided to turn more complex modeling methods including Decision Trees, Random Forest, and LGB Classifier. These models are addressed in the next subsection. 
+To yield better results, we decided to turn more complex modeling methods including a Support Vector Machine, Neural Network, Decision Trees, Random Forest, and LGB Classifier. These models are addressed in the next subsection. 
 
 #### Linear and Polynomial Regression Analysis
 <details><summary>CLICK TO EXPAND</summary>
@@ -413,38 +413,7 @@ plt.savefig('Polynomial Regression.png', dpi = 199)
 </p>
 </details>
 
-### Decision Tree/ Random Forest / LGB Classifier
-
-We use 3 different types of Tree-Classifier methods including Decision Tree, Random Forest, and LGB classifier. We build two models with each model and used a five fold cross validation framework. The first set of models use all 16 features while the second set of models do not account for the feature 'index' (time dependent variable). In the graph below, it is clear that the LGB model with the 'index' feature performs the best. It has a MAE nearly 2.5X smaller than the next best model. 
-
-![Tree_score](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Tree_score.png)
-
-The results from the LGB model with the 'index' feature is displayed below. By simply doing a visual check one can already tell there is a significant improvement from the polynomial and linear regression models. In particular this model is now able to account for nonuniformities in peak height. Additionally, the important features are shown in the bar graph. It emphasized the importance of knowing time component of the singal under analysis. 
-
-Validation MeanAbsoluteError: Mean = 0.680 Std = 0.036
-![LGBM  with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/LGBM_withIndex.png)
-
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-  
-```python
-#import packages
-from sklearn.tree import DecisionTreeRegressor 
-from sklearn.ensemble import RandomForestRegressor
-import lightgbm as lgb
-
-#decision tree model
-model = DecisionTreeRegressor(min_samples_split = 25, random_state = 1, 
-                                  criterion='mae',max_depth=5)
-
-#random forrest
-model = RandomForestRegressor(max_depth=5,min_samples_split=9,random_state=0,
-                                  n_estimators=50,criterion='mae')                                
-```
-</p>
-</details>
-
-## IV. SVM/ Neural Nets
+### Support Vector Machine and Neural Network
 
 ### Nerual Net (NN)
 
@@ -488,6 +457,38 @@ model = SVR(kernel='rbf')
 ```
 </p>
 </details>
+
+### Decision Tree/ Random Forest / LGB Classifier
+
+We use 3 different types of Tree-Classifier methods including Decision Tree, Random Forest, and LGB classifier. We build two models with each model and used a five fold cross validation framework. The first set of models use all 16 features while the second set of models do not account for the feature 'index' (time dependent variable). In the graph below, it is clear that the LGB model with the 'index' feature performs the best. It has a MAE nearly 2.5X smaller than the next best model. 
+
+![Tree_score](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Tree_score.png)
+
+The results from the LGB model with the 'index' feature is displayed below. By simply doing a visual check one can already tell there is a significant improvement from the polynomial and linear regression models. In particular this model is now able to account for nonuniformities in peak height. Additionally, the important features are shown in the bar graph. It emphasized the importance of knowing time component of the singal under analysis. 
+
+Validation MeanAbsoluteError: Mean = 0.680 Std = 0.036
+![LGBM  with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/LGBM_withIndex.png)
+
+<details><summary>CLICK TO EXPAND</summary>
+<p>
+  
+```python
+#import packages
+from sklearn.tree import DecisionTreeRegressor 
+from sklearn.ensemble import RandomForestRegressor
+import lightgbm as lgb
+
+#decision tree model
+model = DecisionTreeRegressor(min_samples_split = 25, random_state = 1, 
+                                  criterion='mae',max_depth=5)
+
+#random forrest
+model = RandomForestRegressor(max_depth=5,min_samples_split=9,random_state=0,
+                                  n_estimators=50,criterion='mae')                                
+```
+</p>
+</details>
+
 
 ## V. Principal Component Analysis - PCA
 
