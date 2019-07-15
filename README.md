@@ -1,5 +1,4 @@
 ## I. Problem statements
-**Please edit this part**
 
 Earthquakes are devastating natural disasters and possess the potential to destroy buildings and cities. In the process they can injure and even kill hundreds and thousands of people. It is necessary to develop solutions to better understand seismic activity to enable accurate and precise prediction of when an earthquake will happen. Tools with this capability provide could equip officials with the necessary information to minimize risks for populations expected to experience seismic activity.  
 
