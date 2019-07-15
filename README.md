@@ -7,7 +7,7 @@ Earthquakes are devastating natural disasters and possess the potential to destr
 Scientist have recently discovered that “constant tremors” measured along fault lines provide valuable information about earthquake activity. The goal of this project is to utilize a machine learning (ML) approach to analyze experimental data that simulates the tremors at fault lines. Ultimately, the goal of the project is to develop a generalized ML model capable of correctly model the tremor waves as a function of time till failure.    
 
 <p align="center">
-  <src="https://github.com/hoangtung167/cx4240/blob/master/CSV%20Files/Introduction_data.png">
+  <img/ src="https://github.com/hoangtung167/cx4240/blob/master/CSV%20Files/Introduction_data.png">
 </p>
 
 
