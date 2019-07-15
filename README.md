@@ -453,22 +453,12 @@ With Index, Validation MeanAbsoluteError: Mean = 1.717 Std = 0.083
 
 ### Random Forest
 
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-  
-```python
-
-```
-
 Validation MeanAbsoluteError: Mean = 2.020 Std = 0.031
 
 ![Random Forest without Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/RF_woIndex.png)
 
 With Index, Validation MeanAbsoluteError: Mean = 1.617 Std = 0.038
 ![Random Forest  with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/RF_withIndex.png)
-
-</p>
-</details>
 
 ### Light Gradient Boosting Machine (LGBM)
 
@@ -481,8 +471,6 @@ Validation MeanAbsoluteError: Mean = 0.680 Std = 0.036
 
 
 ### Tree-based Technique Comparison
-<details><summary>CLICK TO EXPAND</summary>
-<p>
   
 Cross Validation score for 5 folds:
 ![Tree_score](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Tree_score.png)
@@ -490,29 +478,19 @@ Cross Validation score for 5 folds:
 Features Importance:
 ![Tree_feature_importance](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Tree_feature_importance.png)
   
-</p>
-</details>
-
 ## VI. SVM/ Neural Nets
 <details><summary>CLICK TO EXPAND</summary>
 <p>
   
 ```python
+#environment set up
 from keras.models import Sequential
 from keras.layers import Dense
 
 from sklearn.svm import SVR
 from sklearn.feature_selection import RFE
-```
 
-</p>
-</details>
-
-### Nerual Net (NN)
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-  
-```python
+#building NN
 model = Sequential()
 model.add(Dense(32, activation='relu'))
 model.add(Dense(16, activation='relu'))
@@ -520,7 +498,17 @@ model.add(Dense(1, activation='relu'))
 model.compile(loss='mean_squared_error',
               optimizer='sgd',
               metrics=['accuracy'])
+
+#support vector machine
+model = SVR(kernel='linear')
+model = SVR(kernel='rbf')
+
 ```
+
+</p>
+</details>
+
+### Nerual Net (NN)
 
 Validation MeanAbsoluteError: Mean = 2.113 Std = 0.033
 
@@ -529,17 +517,9 @@ Validation MeanAbsoluteError: Mean = 2.113 Std = 0.033
 Validation MeanAbsoluteError: Mean = 2.071 Std = 0.034
 ![NN with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/NN_with_index.png)
 
-</p>
-</details>
 
 ### Support Vector Machine (SVM)
-<details><summary>CLICK TO EXPAND</summary>
-<p>
   
-```python
-model = SVR(kernel='linear')
-```
-
 Validation MeanAbsoluteError: Mean = 2.099 Std = 0.037
 
 ![SVM linear without Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/SVM_linear_withoutIndex.png)
@@ -547,13 +527,6 @@ Validation MeanAbsoluteError: Mean = 2.099 Std = 0.037
 Validation MeanAbsoluteError: Mean = 2.065 Std = 0.038
 ![SVM linear with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/SVM_linear_withIndex.png)
 
-```python
-model = SVR(kernel='rbf')
-```
-
-
-</p>
-</details>
 
 
 ## IV. Principal Component Analysis - PCA
