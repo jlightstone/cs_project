@@ -51,7 +51,7 @@ The basic features are calculate using simple statistics and include ‘mean’,
 
 Once enough features from the data are extracted, one can begin train different ML algorithms to determine which is most capable of modeling the given set. In the following sectin, we test multiple algorithms in order to determine which are best at predicting the time to failure for a slip plane. The feature importance for each ML method is also discussed. 
 
-### Feature Extractions Methods
+#### Feature Extractions Methods
 
 <details><summary>CLICK TO EXPAND</summary>
 <p>
@@ -140,13 +140,13 @@ From the graph, we can observe that the Mean Absolute Error has a tendency to in
 
 ![Compare MAE](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Compare%20MAE%20Linear%20Polynomial.png)
 
-To yield better results, we decided to turn more complex modeling methods including 
+To yield better results, we decided to turn more complex modeling methods including Decision Trees, Random Forest, and LGB Classifier. These models are addressed in the next subsection. 
 
-### Linear and Polynomial Regression Analysis
+#### Linear and Polynomial Regression Analysis
 <details><summary>CLICK TO EXPAND</summary>
 <p>
   
-### Comparing Linear and Polynomial Regression
+##### Comparing Linear and Polynomial Regression
 <details><summary>CLICK TO EXPAND</summary>
 <p>
 
@@ -222,7 +222,7 @@ plt.show()
 </p>
 </details>
 
-### Linear Regression 
+##### Linear Regression 
 <details><summary>CLICK TO EXPAND</summary>
 <p>
 
@@ -357,7 +357,7 @@ plt.show()
 </p>
 </details>
 
-### Polynomial Regression 
+##### Polynomial Regression 
 <details><summary>CLICK TO EXPAND</summary>
 <p>
   
