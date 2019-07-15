@@ -127,9 +127,8 @@ plt.subplots_adjust(wspace=0.5, hspace=0.3)
 
 ## III. Testing Maching Learning Models
 
-## IV. Linear and Polynomial Regression
-<details><summary>Data Read and Helper Methods</summary>
-<p>
+### IV. Linear and Polynomial Regression
+
 
 ### Data Read
 <details><summary>CLICK TO EXPAND</summary>
@@ -143,20 +142,7 @@ target = target[:,1]
 features = pd.read_csv("extract_train_Jul08.csv", delimiter = ',')
 features = features.as_matrix()
 features = features[:, 1:17]
-```
 
-</p>
-</details>
-
-### Helper methods
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-
-#### Kfold Cross Validation for Linear and Polynomial Regression
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-
-```python
 def K_Fold(features, target, degree, numfolds, classifier):
     numfolds += 1
     kf = KFold(n_splits=numfolds)
@@ -177,8 +163,8 @@ def K_Fold(features, target, degree, numfolds, classifier):
             features_poly_train = poly.fit_transform(features_train)
             features_poly_test = poly.fit_transform(features_test)
 
-
         reg = LinearRegression().fit(features_poly_train, target_train)
+        
         if classifier == "ridge" :
             clf = Ridge(alpha=0.001)
             reg = clf.fit(features_poly_train, target_train)
@@ -195,21 +181,12 @@ def K_Fold(features, target, degree, numfolds, classifier):
         if (i < numfolds):
             mae[i-1] = mean_absolute_error(target_test, reg.predict(features_poly_test))
 
-    avrmae = (sum(mae)/(numfolds-1))
-    var = (statistics.variance(mae))
-    return mae, avrmae, var, coef
-```
+avrmae = (sum(mae)/(numfolds-1))
+var = (statistics.variance(mae))
+return mae, avrmae, var, coef
 
-</p>
-</details>
-
-#### Gradient mean and variance extraction method
-
-<details><summary>CLICK TO EXPAND</summary>
-<p>
-
-```python
 def mv(coefmat):
+    
     mean = np.zeros(coefmat.shape[1])
     var = np.zeros(coefmat.shape[1])
     for i in range(coefmat.shape[1]):
@@ -217,12 +194,6 @@ def mv(coefmat):
         var[i] = np.std(coefmat[:, i])
     return mean, var
 ```
-
-</p>
-</details>
-
-</p>
-</details>
 
 </p>
 </details>
