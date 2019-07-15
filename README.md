@@ -124,7 +124,6 @@ for i, col in enumerate(X.columns):
     ax1.legend(loc= 2);ax2.legend(['time_to_failure'], loc=1)
 plt.subplots_adjust(wspace=0.5, hspace=0.3)
 ```
-
 </p>
 </details>
 
@@ -132,11 +131,11 @@ plt.subplots_adjust(wspace=0.5, hspace=0.3)
 
 ### Linear Regression and Polynomial Regression Performance
 
-Analysis began with two of the most simple regression models: linear and polynomial regression. With in the linear regression framework multiple methods were tested- Ridge, Lasso, and Huber Regressor- however none performed as well as the traditional linear regression model. For the polynomial model we fit the model to a 2nd degree polynomial. 
+Analysis began with linear and polynomial regression. With in the linear regression framework, ltiple methods were tested- Ridge, Lasso, and Huber Regressor. For the polynomial model we fit the model to a 2nd degree polynomial. 
 
-The linear regression model provide fairly acceptable prediction for "time before failure". However, he model cannot predict high peak and yields a consistent trend of repeating height - nearly periodic. The polynomial regression model yields nearly identical resuts to the linear regression model, but displays a slightly larger error.
+The linear regression model provide fairly acceptable prediction for "time before failure". However, the model was unable to predict high peaks and yields a consistent trend of repeating height - nearly periodic. The polynomial regression model yields nearly identical resuts to the linear regression model, but displays a slightly larger error.
 
-From the graph, we can observe that the Mean Absolute Error has a tendency to increase with degree levels. Furthermore, the variance also increases significantly which implies that we may overfit the data with higher order models. Since degree equals 1 is the Linear Regression model, we decide to use degree of 2 to continue our analysis.
+From the graphs below, we can observe that the Mean Absolute Error has a tendency to increase as the polynomial degree is increased. Furthermore, the variance increases significantly as the polynomial degree is increased. This likely indicates that overfitting has occured. Ultimately we decide to use 2nd degree polynomial to build a model (1st degree polynomial is simply a linear function). 
 
 <p align="center">
   <img/ src="https://github.com/hoangtung167/cx4240/blob/master/Graphs/Compare%20Predicted%20Values.png">
@@ -145,8 +144,7 @@ From the graph, we can observe that the Mean Absolute Error has a tendency to in
   <img/ src="https://github.com/hoangtung167/cx4240/blob/master/Graphs/Compare%20MAE%20Linear%20Polynomial.png">
 </p>
 
-
-To yield better results, we decided to turn more complex modeling methods including a Support Vector Machine, Neural Network, Decision Trees, Random Forest, and LGB Classifier. These models are addressed in the next subsection. 
+To yield better results, we turned to more complex modeling methods: Support Vector Machines, Neural Networks, Decision Trees, Random Forest, and LGB Classifier. These models are addressed below.  
 
 #### Linear and Polynomial Regression Analysis
 <details><summary>CLICK TO EXPAND</summary>
@@ -426,16 +424,14 @@ plt.savefig('Polynomial Regression.png', dpi = 199)
 
 ### Nerual Net (NN)
 
-Validation MeanAbsoluteError: Mean = 2.113 Std = 0.033
+NN Validation (no_index) MeanAbsoluteError: Mean = 2.113 Std = 0.033
 
-![NN without Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/NN_without_Index.png)
-
-Validation MeanAbsoluteError: Mean = 2.071 Std = 0.034
+NN Validation (index) MeanAbsoluteError: Mean = 2.071 Std = 0.034
 ![NN with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/NN_with_index.png)
 
 ### Support Vector Machine (SVM)
   
-Validation MeanAbsoluteError: Mean = 2.065 Std = 0.038
+SVM Validation (index) MeanAbsoluteError: Mean = 2.065 Std = 0.038
 ![SVM linear with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/SVM_linear_withIndex.png)
 
 #### Building NN and SVM
