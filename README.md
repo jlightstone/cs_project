@@ -45,8 +45,12 @@ Using resourses from [kaggle](https://www.kaggle.com/c/LANL-Earthquake-Predictio
 
 The basic features are calculate using simple statistics and include ‘mean’, ‘std’, and ‘skew’.  The fast fourier transformed features convert the time-domain signal into a frequency-domain signal, which results in real and imaginary numbers. The mean and standard deviation for the real and imaginary numbers were calculated, resulting in 4 more features. The rolling windows method resulted from breaking the larger data set into a rolling window size of 100. From this, the mean, standard deviation, and upper and lower percentiles subsets were used to extract an additional six features. Lastly, the Librosa toolbox was used to calculate the Mel-frequency cepstral coefficients of two features. 
 
-![Top_feature 1](https://github.com/jlightstone/cs_project/blob/master/Graphs/Feature_1.png)
-![Top feature 2](https://github.com/jlightstone/cs_project/blob/master/Graphs/Feature_2.png)
+<p align="center">
+  <img/ src="https://github.com/jlightstone/cs_project/blob/master/Graphs/Feature_1.png">
+</p>
+<p align="center">
+  <img/ src="https://github.com/jlightstone/cs_project/blob/master/Graphs/Feature_2.png">
+</p>
 
 Once enough features from the data are extracted, one can begin train different ML algorithms to determine which is most capable of modeling the given set. In the following section, we test multiple algorithms in order to determine which are best at predicting the time to failure for a slip plane. The feature importance for each ML method is also discussed. 
 
@@ -134,10 +138,13 @@ The linear regression model provide fairly acceptable prediction for "time befor
 
 From the graph, we can observe that the Mean Absolute Error has a tendency to increase with degree levels. Furthermore, the variance also increases significantly which implies that we may overfit the data with higher order models. Since degree equals 1 is the Linear Regression model, we decide to use degree of 2 to continue our analysis.
 
-![Comapare Predicted Values](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Compare%20Predicted%20Values.png)
+<p align="center">
+  <img/ src="https://github.com/hoangtung167/cx4240/blob/master/Graphs/Compare%20Predicted%20Values.png">
+</p>
+<p align="center">
+  <img/ src="https://github.com/hoangtung167/cx4240/blob/master/Graphs/Compare%20MAE%20Linear%20Polynomial.png">
 </p>
 
-![Compare MAE](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Compare%20MAE%20Linear%20Polynomial.png)
 
 To yield better results, we decided to turn more complex modeling methods including a Support Vector Machine, Neural Network, Decision Trees, Random Forest, and LGB Classifier. These models are addressed in the next subsection. 
 
@@ -465,12 +472,17 @@ model = SVR(kernel='rbf')
 
 We use 3 different types of Tree-Classifier methods including Decision Tree, Random Forest, and LGB classifier. We build two models with each model and used a five fold cross validation framework. The first set of models use all 16 features while the second set of models do not account for the feature 'index' (time dependent variable). In the graph below, it is clear that the LGB model with the 'index' feature performs the best. It has a MAE over 2x smaller than the next best model. 
 
-![Tree_score](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Tree_score.png)
+<p align="center">
+  <img/ src="https://github.com/hoangtung167/cx4240/blob/master/Graphs/Tree_score.png">
+</p>
 
 The results from the LGB model with the 'index' feature is displayed below. By simply doing a visual check one can already tell there is a significant improvement from the polynomial and linear regression models. In particular this model is now able to account for nonuniformities in peak height. Additionally, the important features are shown in the bar graph. It emphasized the importance of knowing time component of the singal under analysis. 
 
 Validation MeanAbsoluteError: Mean = 0.680 Std = 0.036
-![LGBM  with Index](https://github.com/hoangtung167/cx4240/blob/master/Graphs/LGBM_withIndex.png)
+
+<p align="center">
+  <img/ src="https://github.com/hoangtung167/cx4240/blob/master/Graphs/LGBM_withIndex.png">
+</p>
 
 <details><summary>CLICK TO EXPAND</summary>
 <p>
@@ -498,7 +510,11 @@ In the figure below the MAE score with five-fold cross validation is reported fo
 
 #### Compare the loss values and variances across methods
 
-![Summary_MAE_Score](https://github.com/hoangtung167/cx4240/blob/master/CSV%20Files/Summary_MAE_Score.png)
+<p align="center">
+  <img/ src="https://github.com/hoangtung167/cx4240/blob/master/CSV%20Files/Summary_MAE_Score.png">
+</p>
+
+
 
 ## V. Principal Component Analysis - PCA
 
@@ -512,24 +528,30 @@ The x-axis of the graph below indicated each principal component for the featuri
 
 The red line shows the cumulative proportional variance after each principal component is formed. The dashed line is an indication of 99% variance of the data. One can see that the dashed line crosses the cumulative sum (red) line at the 9th principal component. This indicated that 99% of the variance within the data is accounted for when the dimensionality of the data is reduced from 16 dimensions down to 9 dimensions. 
 
-
-![Principal Components Visualization](https://github.com/hoangtung167/cx4240/blob/master/Graphs/principal_component_visualization.png)
+<p align="center">
+  <img/ src="https://github.com/hoangtung167/cx4240/blob/master/Graphs/principal_component_visualization.png">
+</p>
 
 ### Feature Variance for Principal Components 1 & 2
 
 The two plots show the contributing variance of each feature in the first and second principal components. Yellow indicates a high positive variance while purple indicates a high negative variance. In the first principal component the features contributing to the most variance are the ‘Roll_std_pXX’ features as well as the “MFCC_mean02” feature. In the second principal component the “mean”, “FFT_std_max”, and “index” features contribute to the most variance. Knowing this correlation relationship could provide a framework for identifying the features providing the most significant variation within the model. 
 
+<p align="center">
+  <img/ src="https://github.com/hoangtung167/cx4240/blob/master/Graphs/first_principal_component.png">
+</p>
 
-![First Principal Component](https://github.com/hoangtung167/cx4240/blob/master/Graphs/first_principal_component.png)
+<p align="center">
+  <img/ src="https://github.com/hoangtung167/cx4240/blob/master/Graphs/second_principal_component.png">
+</p>
 
-![second Principal Component](https://github.com/hoangtung167/cx4240/blob/master/Graphs/second_principal_component.png)
-
- ### Visualizing Feature Correlation
+### Visualizing Feature Correlation
 
 The final graph within this section is a heat map which shows the correlation between different features. Dark red indicates that features have a strong positive correlation while dark blue indicates that there is a strong negative correlation between features. This heat map provides insight into which features are linearly independent and which variables linearly dependent. For example, the “Roll_std_p60” and “skew” features are linearly independent and have nearly zero correlation with other features. On the other hand, “Roll_std_60” is strongly correlated with 7 other features. 
 
+<p align="center">
+  <img/ src="https://github.com/hoangtung167/cx4240/blob/master/Graphs/heat_map.png">
+</p>
 
-![Feature Correlation](https://github.com/hoangtung167/cx4240/blob/master/Graphs/heat_map.png)
 
 Now that we have a better understanding of the feature importance and optimal dimensionality of our dataset, we plan to train a model on the reduced dimensionality matrix to see if we can improve our prediction capabilities. 
 
@@ -619,5 +641,8 @@ df.to_csv('pca_exported_9features.csv')
 
 #### Comparing the feature importance across methods
 
-![Summary_Feature_Importance](https://github.com/hoangtung167/cx4240/blob/master/CSV%20Files/Summary_Feature_Importance.png)
+
+<p align="center">
+  <img/ src="https://github.com/hoangtung167/cx4240/blob/master/CSV%20Files/Summary_Feature_Importance.png">
+</p>
 
