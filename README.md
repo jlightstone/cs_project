@@ -128,23 +128,19 @@ plt.subplots_adjust(wspace=0.5, hspace=0.3)
 ## III. Testing Maching Learning Models
 
 ### Linear Regression and Polynomial Regression Performance
-Analysis began with two of the most simple regression models: linear and polynomial regression. With in the linear regression framework multiple methods were tested- Ridge, Lasso, and Huber Regressor- however none performed as well as the traditional linear regression model. To optimize the Polynomial regression model we tested with different k-fold values and determined the the highest performance occured when 
 
-rom the graph, we see that the linear regression model provide fairly acceptable prediction on the outcome - "Time before failure(s)". However, we can observe the tendency to center the values: the model can not predict high peak an show consistent trend of repeating height - nearly periodic. To combat this situation, we decided to use two different approaches: first is to use different type of regressor and compare and validate them using Kfold cross-validation, second is to use the polynomial regression. We suspect that there is no significant improvement when using different types of linear regression as all of them have a tendency to center the values.
+Analysis began with two of the most simple regression models: linear and polynomial regression. With in the linear regression framework multiple methods were tested- Ridge, Lasso, and Huber Regressor- however none performed as well as the traditional linear regression model. For the polynomial model we fit the model to a 2nd degree polynomial. 
 
-![Linear Regression K Fold](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Linear%20Regression%20K%20Fold.png)
+The linear regression model provide fairly acceptable prediction for "time before failure". However, he model cannot predict high peak and yields a consistent trend of repeating height - nearly periodic. The polynomial regression model yields nearly identical resuts to the linear regression model, but displays a slightly larger error.
 
-
-![Polynomial K Fold](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Polynomial%20K%20Fold.png)
-
-
-![Linear Regression](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Linear%20Regression.png)  
-
+From the graph, we can observe that the Mean Absolute Error has a tendency to increase with degree levels. Furthermore, the variance also increases significantly which implies that we may overfit the data with higher order models. Since degree equals 1 is the Linear Regression model, we decide to use degree of 2 to continue our analysis.
 
 ![Comapare Predicted Values](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Compare%20Predicted%20Values.png)
 </p>
 
 ![Compare MAE](https://github.com/hoangtung167/cx4240/blob/master/Graphs/Compare%20MAE%20Linear%20Polynomial.png)
+
+To yield better results, we decided to turn more complex modeling methods including 
 
 
 #### Comparing Linear and Polynomial Regression
@@ -397,18 +393,6 @@ plt.show()
 </p>
 </details>
 
-
-###### Analysis
-F
-#### Compare different types of regression models
-
-
-
-##### Analysis
-Just as what we predicted, using other types of regressor such as  do not increase accuracy significantly. Specially, we event observe a worst model with Huber Regressor: higher Mean Absolute Error with higher variance
-
-
-
 #### Feature Importance
 
 We output and graphs the coefficients in the weight from linear regression model corresponding to features. This graphs will be able to tell us the gradient values of features and thus their respective importance.
@@ -418,17 +402,6 @@ We output and graphs the coefficients in the weight from linear regression model
 #### Perform K-Fold to analyze and determine optimal degree
 <details><summary>CLICK TO EXPAND</summary>
 <p>
-
-
-
-
-
-
-##### Analysis
-From the graph, we can observe that the Mean Absolute Error has a tendency to increase with degree levels. Furthermore, the variance also increases significantly which implies that we may overfit the data with higher order models. Since degree equals 1 is the Linear Regression model, we decide to use degree of 2 to continue our analysis.
-
-</p>
-</details>
 
 #### Perform Polynomial Regression with Degree of 2
 <details><summary>CLICK TO EXPAND</summary>
